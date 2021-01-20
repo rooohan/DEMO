@@ -9,4 +9,4 @@
 % !dir
 % !git add .
 % !git commit -m "auto save"
-!git push -u origin DEMO
+!git push -u origin dev
