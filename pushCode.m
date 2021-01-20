@@ -7,6 +7,6 @@
 
 % !git pull origin Hannahnn
 % !dir
-!git add .
-!git commit -m "auto save"
+% !git add .
+% !git commit -m "auto save"
 !git push -u origin Hannahnn
