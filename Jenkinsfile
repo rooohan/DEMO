@@ -1,15 +1,10 @@
 pipeline {
-  agent {
-    node {
-      label 'test'
-    }
-
-  }
+  agent any
   stages {
     stage('step1') {
+      agent any
       steps {
         echo 'start'
-        runMATLABCommand 'CodeGenerate'
       }
     }
 
