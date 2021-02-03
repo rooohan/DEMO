@@ -24,11 +24,13 @@ pipeline {
         stage('代码静态检查') {
             steps {
                 echo 'polyspace bug finder检查及报告生成'
+                runMATLABCommand 'BugFinder'
             }
         }
         stage('代码动态测试') {
             steps {
                 echo 'polyspace code prover动态测试及报告生成'
+                runMATLABCommand 'CodeProver'
             }
         }
         stage('HIL测试') {
