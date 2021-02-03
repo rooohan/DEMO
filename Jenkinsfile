@@ -50,8 +50,8 @@ pipeline {
    }
 
     environment {
-        nohup = 'G:\\Import\\Git\\usr\\bin'
-        SHELL = 'G:\\Import\\Git\\bin\\sh.exe'
-        PATH = 'G:\\APP\\Matlab\\bin\\win64;G:\\Import\\Git\\bin\\sh.exe'
+        nohup = 'D:\\software\\Git\\usr\\bin'
+        SHELL = 'D:\\software\\Git\\bin\\sh.exe'
+        PATH = 'D:\\software\\Polyspace\\R2020a\\bin\\win64;D:\\software\\Git\\bin\\sh.exe'
     }
 }
