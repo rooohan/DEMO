@@ -12,7 +12,7 @@ pipeline {
         }
         stage('单元测试') {
             steps {
-                echo '模型单元测试及报告生成(simulink test)'
+                echo '模型单元测试及报告生成'
             }
         }
         stage('代码生成') {
@@ -23,14 +23,19 @@ pipeline {
         }
         stage('代码bug finder检查') {
             steps {
-                echo '代码bug finder检查及报告生成'
+                echo 'bug finder静态检查及报告生成'
                 runMATLABCommand 'BugFinder'
             }
         }
         stage('代码code prover检查') {
             steps {
-                echo '代码code prover检查及报告生成'
+                echo 'code prover静态检查及报告生成'
                 runMATLABCommand 'CodeProver'
+            }
+        }
+        stage('代码动态测试') {
+            steps {
+                echo 'SIL-软件在环测试'
             }
         }
         stage('HIL测试') {
