@@ -11,7 +11,7 @@ load_system(model_name);
 %% set parameters
 set_param(model_name,'StopTime','10.0 ');
 set_param(model_name,'SolverType','Fixed-step');
-set_param(model_name,'Solver','FixedStepAuto');
+set_param(model_name,'Solver','FixedStepDiscrete');
 set_param(model_name,'FixedStep','0.1');
 
 set_param(model_name,'SystemTargetFile','ert.tlc');

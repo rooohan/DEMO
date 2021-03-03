@@ -9,7 +9,7 @@ load_system(model_name);
 
 set_param(model_name,'StopTime','4.0');
 set_param(model_name,'SolverType','Fixed-step');
-set_param(model_name,'Solver','FixedStepAuto'); %Discrete
+set_param(model_name,'Solver','FixedStepDiscrete'); %Auto
 set_param(model_name,'FixedStep','0.1');
 
 set_param(model_name,'SystemTargetFile','ert.tlc');
@@ -32,7 +32,7 @@ set_param(model_name,'ExternalInput','[0, input]');
 set_param(model_name,'SimulationMode','Software-in-the-Loop (SIL)');
 
 %% read excel data
-[num, txt] = xlsread('./test_case.xlsx');
+[num, txt] = xlsread('./test_case2.xlsx');
 TestNum = length(num(1:end, 1));
 TestCondition = txt(2:2, 2);
 ExpectedResult = txt(2:end, 3);
@@ -50,12 +50,12 @@ for i = 1:TestNum
 end
 
 %% write the result to excel
-xlswrite('./test_case.xlsx', TestResult', 'Sheet1', 'D2');
+xlswrite('./test_case2.xlsx', TestResult', 'Sheet1', 'D2');
 
 % [~,~,SIL_Out] = sim(model_name);
 %% plot the result
-fig1 = figure;
-subplot(3,1,1), plot(MIL_Out), title('Output for Normal Simulation')
-subplot(3,1,2), plot(SIL_Out), title('Output for SIL Simulation')
-subplot(3,1,3), plot(MIL_Out-SIL_Out), ...
-    title('Difference Between Normal and SIL');
+% fig1 = figure;
+% subplot(3,1,1), plot(MIL_Out), title('Output for Normal Simulation')
+% subplot(3,1,2), plot(SIL_Out), title('Output for SIL Simulation')
+% subplot(3,1,3), plot(MIL_Out-SIL_Out), ...
+%     title('Difference Between Normal and SIL');
