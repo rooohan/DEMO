@@ -26,7 +26,7 @@ proj.Configuration.ResultsDir = fullfile(pwd, 'results_CodeProver');
 % proj.CodingRulesCodeMetrics.EnableMisraC3 = true;
 % proj.CodingRulesCodeMetrics.MisraC3Subset = 'all';
 proj.Configuration.MergedReporting.EnableReportGeneration = true;
-proj.Configuration.MergedReporting.ReportOutputFormat = 'PDF';
+proj.Configuration.MergedReporting.ReportOutputFormat = 'HTML';
 
 %% code prover
 proj.Configuration.CodeProverVerification.MainGenerator = true;
