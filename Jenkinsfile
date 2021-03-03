@@ -5,9 +5,10 @@ pipeline {
         }
     }
     stages {
-        stage('模型静态分析') {
+        stage('MIL测试') {
             steps {
-                echo '模型静态分析及报告生成(simulink check)'
+                echo '模型MIL测试及报告生成'
+                runMATLABCommand 'MIL_test'
             }
         }
         stage('单元测试') {
