@@ -42,7 +42,8 @@ cs.set_param('AutoInsertRateTranBlk', 'off');   % Automatically handle rate tran
 
 % Data Import/Export
 cs.set_param('Decimation', '1');   % Decimation
-cs.set_param('LoadExternalInput', 'off');   % Load external input
+cs.set_param('LoadExternalInput', 'on');   % Load external input
+cs.set_param('ExternalInput', '[0, input]');   % External input variable
 cs.set_param('SaveFinalState', 'off');   % Save final state
 cs.set_param('LoadInitialState', 'off');   % Load initial state
 cs.set_param('LimitDataPoints', 'off');   % Limit data points
