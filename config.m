@@ -21,7 +21,7 @@ cs.switchTarget('ert.tlc','');
 
 cs.set_param('HardwareBoard', 'None');   % Hardware board
 
-cs.set_param('TargetLang', 'C++');   % Language
+cs.set_param('TargetLang', 'C');   % Language
 
 cs.set_param('CodeInterfacePackaging', 'Nonreusable function');   % Code interface packaging
 
