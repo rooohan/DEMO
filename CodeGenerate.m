@@ -14,12 +14,15 @@ function CodeGenerate()
 %     proj = simulinkproject;
     % Open the model
     target_mdl = 'ControlVehicleVelocity';
+    file_name = [target_mdl , '_ert_rtw'];
 %     open_system(target_mdl);
     load_system(target_mdl);
     % Set model parameters
     set_param(target_mdl,'LaunchReport','off');
+    set_param(target_mdl,'GenCodeOnly', 'on');
     try
         rtwbuild(target_mdl);
+        movefile(file_name,'./RESULT');
     catch
         warning(['Error while building model - ',target_mdl]);
 %         exit(1);

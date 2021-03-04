@@ -25,6 +25,7 @@ set_param(model_name,'CodeExecutionProfiling','off');
 
 set_param(model_name,'LoadExternalInput','on');
 set_param(model_name,'ExternalInput','[0, input]');
+set_param(model_name,'OutputSaveName', 'MIL_out');
 
 % MIL Simulation set
 set_param(model_name,'SimulationMode','Normal');
@@ -43,9 +44,17 @@ for i = 1:TestNum
     sim('./ControlVehicleVelocity.slx');
     for j = 1:length(ExpectedResult)
         eval([ExpectedResult{j}]);
-        TestResult(j) = (yout{1}.Values.Data(j) - Out) < 0.1;
+        TestResult(j) = abs(MIL_out{1}.Values.Data(j) - Out) < 0.1;
     end
 end
-
+%%
+result_path = './RESULT/MIL_result';
+if exist(result_path,'dir') == 0
+   mkdir(result_path);
+end
 %% write the result to excel
-xlswrite('./test_case2.xlsx', TestResult', 'Sheet1', 'D2');
+file_path = [result_path, '/MIL_result.xlsx'];
+xlswrite(file_path, MIL_out{1}.Values.Time, 'Sheet1', 'A2');
+xlswrite(file_path, ExpectedResult, 'Sheet1', 'B2');
+xlswrite(file_path, MIL_out{1}.Values.Data, 'Sheet1', 'C2');
+xlswrite(file_path, TestResult', 'Sheet1', 'D2');

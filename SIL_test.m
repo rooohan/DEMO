@@ -7,7 +7,7 @@
 model_name = 'ControlVehicleVelocity';   %gcs
 load_system(model_name);
 
-set_param(model_name,'StopTime','4.0');
+set_param(model_name,'StopTime','10.0');
 set_param(model_name,'SolverType','Fixed-step');
 set_param(model_name,'Solver','FixedStepDiscrete'); %Auto
 set_param(model_name,'FixedStep','0.1');
@@ -23,6 +23,7 @@ set_param(model_name,'CodeExecutionProfiling','off');
 
 set_param(model_name,'LoadExternalInput','on');
 set_param(model_name,'ExternalInput','[0, input]');
+set_param(model_name,'OutputSaveName', 'SIL_out');
 
 % MIL Simulation set
 % set_param(model_name,'SimulationMode','Normal');
@@ -45,7 +46,7 @@ for i = 1:TestNum
     sim('./ControlVehicleVelocity.slx');
     for j = 1:length(ExpectedResult)
         eval([ExpectedResult{j}]);
-        TestResult(j) = (yout{1}.Values.Data(j) - Out) < 0.1;
+        TestResult(j) = (SIL_out{1}.Values.Data(j) - Out) < 0.1;
     end
 end
 
