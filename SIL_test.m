@@ -14,7 +14,7 @@ set_param(model_name,'Solver','FixedStepDiscrete'); %Auto
 set_param(model_name,'FixedStep','0.1');
 
 set_param(model_name,'SystemTargetFile','ert.tlc');
-set_param(model_name,'TargetLang', 'C');
+% set_param(model_name,'TargetLang', 'C');
 set_param(model_name,'PortableWordSizes','off');
 set_param(model_name,'TargetHWDeviceType','Custom Processor->MATLAB Host Processor');
 set_param(model_name,'ProdEqTarget','off');
@@ -46,7 +46,7 @@ TestResult = false(1,length(ExpectedResult));
 
 for i = 1:TestNum
     eval([TestCondition{i}]);
-    sim(model_name);
+    sim('./ControlVehicleVelocity.slx');
     for j = 1:length(ExpectedResult)
         eval([ExpectedResult{j}]);
         TestResult(j) = (SIL_out{1}.Values.Data(j) - Out) < 0.1;

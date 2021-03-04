@@ -435,7 +435,7 @@ cs.set_param('DSAsUniqueAccess', 'off');   % Implement each data store block as 
 
 % Simulink Coverage
 cs.set_param('CovModelRefEnable', 'on');   % Record coverage for referenced models
-cs.set_param('RecordCoverage', 'on');   % Record coverage for this model
+cs.set_param('RecordCoverage', 'off');   % Record coverage for this model
 cs.set_param('CovScope', 'EntireSystem');   % Scope of coverage analysis
 cs.set_param('CovEnable', 'on');   % Enable coverage analysis
 cs.set_param('CovExternalEMLEnable', 'on');   % Record coverage for MATLAB files
