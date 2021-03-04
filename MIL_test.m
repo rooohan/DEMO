@@ -15,6 +15,7 @@ set_param(model_name,'Solver','FixedStepDiscrete');
 set_param(model_name,'FixedStep','0.1');
 
 set_param(model_name,'SystemTargetFile','ert.tlc');
+set_param(model_name,'TargetLang', 'C');
 set_param(model_name,'PortableWordSizes','off');
 set_param(model_name,'TargetHWDeviceType','Custom Processor->MATLAB Host Processor');
 set_param(model_name,'ProdEqTarget','off');
@@ -41,7 +42,7 @@ TestResult = false(1,length(ExpectedResult));
 
 for i = 1:TestNum
     eval([TestCondition{i}]);
-    sim('./ControlVehicleVelocity.slx');
+    sim(model_name);
     for j = 1:length(ExpectedResult)
         eval([ExpectedResult{j}]);
         TestResult(j) = abs(MIL_out{1}.Values.Data(j) - Out) < 0.1;
@@ -58,3 +59,10 @@ xlswrite(file_path, MIL_out{1}.Values.Time, 'Sheet1', 'A2');
 xlswrite(file_path, ExpectedResult, 'Sheet1', 'B2');
 xlswrite(file_path, MIL_out{1}.Values.Data, 'Sheet1', 'C2');
 xlswrite(file_path, TestResult', 'Sheet1', 'D2');
+
+%% plot the result
+% fig1 = figure;
+% subplot(3,1,1), plot(MIL_Out), title('Output for Normal Simulation')
+% subplot(3,1,2), plot(SIL_Out), title('Output for SIL Simulation')
+% subplot(3,1,3), plot(MIL_Out-SIL_Out), ...
+%     title('Difference Between Normal and SIL');

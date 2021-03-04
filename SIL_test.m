@@ -4,6 +4,7 @@
 % Time: 2021.3.2
 % Author: Hannah
 % ------------------------------------------
+
 model_name = 'ControlVehicleVelocity';   %gcs
 load_system(model_name);
 
@@ -13,6 +14,7 @@ set_param(model_name,'Solver','FixedStepDiscrete'); %Auto
 set_param(model_name,'FixedStep','0.1');
 
 set_param(model_name,'SystemTargetFile','ert.tlc');
+set_param(model_name,'TargetLang', 'C');
 set_param(model_name,'PortableWordSizes','off');
 set_param(model_name,'TargetHWDeviceType','Custom Processor->MATLAB Host Processor');
 set_param(model_name,'ProdEqTarget','off');
@@ -24,6 +26,7 @@ set_param(model_name,'CodeExecutionProfiling','off');
 set_param(model_name,'LoadExternalInput','on');
 set_param(model_name,'ExternalInput','[0, input]');
 set_param(model_name,'OutputSaveName', 'SIL_out');
+set_param(model_name,'GenCodeOnly', 'on');
 
 % MIL Simulation set
 % set_param(model_name,'SimulationMode','Normal');
@@ -43,17 +46,25 @@ TestResult = false(1,length(ExpectedResult));
 
 for i = 1:TestNum
     eval([TestCondition{i}]);
-    sim('./ControlVehicleVelocity.slx');
+    sim(model_name);
     for j = 1:length(ExpectedResult)
         eval([ExpectedResult{j}]);
         TestResult(j) = (SIL_out{1}.Values.Data(j) - Out) < 0.1;
     end
 end
 
+%%
+result_path = './RESULT/SIL_result';
+if exist(result_path,'dir') == 0
+   mkdir(result_path);
+end
 %% write the result to excel
-xlswrite('./test_case2.xlsx', TestResult', 'Sheet1', 'D2');
+file_path = [result_path, '/SIL_result.xlsx'];
+xlswrite(file_path, SIL_out{1}.Values.Time, 'Sheet1', 'A2');
+xlswrite(file_path, ExpectedResult, 'Sheet1', 'B2');
+xlswrite(file_path, SIL_out{1}.Values.Data, 'Sheet1', 'C2');
+xlswrite(file_path, TestResult', 'Sheet1', 'D2');
 
-% [~,~,SIL_Out] = sim(model_name);
 %% plot the result
 % fig1 = figure;
 % subplot(3,1,1), plot(MIL_Out), title('Output for Normal Simulation')
