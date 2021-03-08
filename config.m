@@ -437,7 +437,7 @@ cs.set_param('DSAsUniqueAccess', 'off');   % Implement each data store block as 
 cs.set_param('CovModelRefEnable', 'on');   % Record coverage for referenced models
 cs.set_param('RecordCoverage', 'off');   % Record coverage for this model
 cs.set_param('CovScope', 'EntireSystem');   % Scope of coverage analysis
-cs.set_param('CovEnable', 'on');   % Enable coverage analysis
+cs.set_param('CovEnable', 'off');   % Enable coverage analysis
 cs.set_param('CovExternalEMLEnable', 'on');   % Record coverage for MATLAB files
 cs.set_param('CovSFcnEnable', 'on');   % Record coverage for C/C++ S-functions
 cs.set_param('CovHighlightResults', 'off');   % Display coverage results using model coloring

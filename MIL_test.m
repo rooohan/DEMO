@@ -8,6 +8,7 @@
 %% load model
 model_name = 'ControlVehicleVelocity'; %gcs
 load_system(model_name);
+
 %% set parameters
 set_param(model_name,'StopTime','10.0 ');
 set_param(model_name,'SolverType','Fixed-step');
