@@ -51,6 +51,7 @@ for i = 1:TestNum
         TestResult(j) = abs(MIL_out{1}.Values.Data(j) - Out) < 0.1;
     end
 end
+close_system(model_name);
 %%
 result_path = './RESULT/MIL_result';
 if exist(result_path,'dir') == 0
