@@ -32,7 +32,6 @@ set_param(model_name,'OutputSaveName', 'MIL_out');
 % MIL Simulation set
 set_param(model_name,'SimulationMode','Normal');
 save_system(model_name,[],'OverwriteIfChangedOnDisk',true);
-close_system(model_name);
 
 %% read excel data
 [num, txt] = xlsread('./test_case2.xlsx');
