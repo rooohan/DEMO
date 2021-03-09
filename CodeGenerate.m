@@ -5,7 +5,6 @@
 %   Author       : Hannah
 %   Time         : 2021/1/20
 %   Instructions : Creat initial version           2021/1/20           V0.1
-%  
 %------------------------------------------------------------------------------
 function CodeGenerate()
     % Open project
@@ -20,6 +19,12 @@ function CodeGenerate()
     % Set model parameters
     set_param(target_mdl,'LaunchReport','off');
     set_param(target_mdl,'GenCodeOnly', 'on');
+    
+    result_path = './RESULT';
+    if exist(result_path,'dir') == 0
+        mkdir(result_path);
+    end
+    
     try
         rtwbuild(target_mdl);
         movefile(file_name,'./RESULT');
@@ -29,7 +34,8 @@ function CodeGenerate()
     end
     % Restore model parameters
     set_param(target_mdl,'LaunchReport','on');
+    save_system(target_mdl,[],'OverwriteIfChangedOnDisk',true);
     % Close all simulink model without save
-    bdclose;
-%     exit(0);
+    close_system(target_mdl);
+%     bdclose;
 end

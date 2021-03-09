@@ -31,6 +31,8 @@ set_param(model_name,'OutputSaveName', 'MIL_out');
 
 % MIL Simulation set
 set_param(model_name,'SimulationMode','Normal');
+save_system(model_name,[],'OverwriteIfChangedOnDisk',true);
+close_system(model_name);
 
 %% read excel data
 [num, txt] = xlsread('./test_case2.xlsx');
@@ -55,6 +57,10 @@ if exist(result_path,'dir') == 0
    mkdir(result_path);
 end
 %% write the result to excel
+file_path = [result_path, '/MIL_result.xlsx'];
+data = {'采样时间','期望结果','测试结果','比较结果'};
+xlswrite(file_path, data, 'Sheet1', 'A1:D1');
+
 file_path = [result_path, '/MIL_result.xlsx'];
 xlswrite(file_path, MIL_out{1}.Values.Time, 'Sheet1', 'A2');
 xlswrite(file_path, ExpectedResult, 'Sheet1', 'B2');
